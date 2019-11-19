@@ -6,6 +6,12 @@ skip_branch_with_pr: true
 
 environment:
   matrix:
+    - target_framework: netcoreapp3.0
+      is_32bit: False
+
+    - target_framework: netcoreapp3.0
+      is_32bit: True
+
     - target_framework: netcoreapp2.1
       is_32bit: False
 
@@ -46,6 +52,8 @@ install:
 before_build:
   - git submodule -q update --init
   - cmd: dotnet --info
+  # add location of used Python to path
+  - set path=%path%;C:\Python34;C:\Python34\Scripts
   
 build_script:
 - cmd: build.cmd
