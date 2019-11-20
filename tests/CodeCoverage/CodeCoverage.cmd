@@ -17,5 +17,10 @@ tests\CodeCoverage\OpenCover.4.6.519\tools\OpenCover.Console.exe -target:"dotnet
 if %errorlevel% neq 0 exit /b %errorlevel%
 
 SET PATH=C:\\Python34;C:\\Python34\\Scripts;%PATH%
-pip install codecov
+
+rem Install tool for uploading coverage data to codecov.io; select version
+rem 2.0.10 specifically since later versions seem to have a bug due to
+rem which calling 'codecov' in a PowerShell script fails.
+rem https://github.com/frerich/clcache/pull/321/files#diff-180360612c6b8c4ed830919bbb4dd459R59
+pip install https://github.com/codecov/codecov-python/tarball/v2.0.10
 codecov -f "ImageSharp.Coverage.xml"
